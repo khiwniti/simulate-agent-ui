@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { ChevronRightIcon, ChevronDownIcon, FolderIcon, FileIcon } from './icons';
+import { ChevronRightIcon, ChevronDownIcon, FolderIcon, FileIcon, ImportIcon, EditIcon } from './icons';
 import type { WorkflowStage } from '../App';
 import Tooltip from './Tooltip';
 
@@ -87,6 +88,22 @@ const FileExplorerPanel: React.FC = () => {
 const GeometryPanel: React.FC = () => {
   return (
     <CollapsiblePanel title="GEOMETRY" defaultOpen={true}>
+      <div className="p-2 border-b border-gray-700">
+        <div className="flex items-center space-x-2">
+            <Tooltip text="Import a CAD file (e.g., STEP, IGES)">
+                <button className="flex-1 flex items-center justify-center space-x-2 bg-gray-700 hover:bg-gray-600 text-sm py-1.5 rounded-md transition-colors">
+                    <ImportIcon className="w-4 h-4" />
+                    <span>Import</span>
+                </button>
+            </Tooltip>
+            <Tooltip text="Enter Geometry Edit Mode">
+                <button className="flex-1 flex items-center justify-center space-x-2 bg-gray-700 hover:bg-gray-600 text-sm py-1.5 rounded-md transition-colors">
+                    <EditIcon className="w-4 h-4" />
+                    <span>Edit</span>
+                </button>
+            </Tooltip>
+        </div>
+      </div>
       <div className="p-2 space-y-1">
         <CollapsibleTreeItem icon={<FolderIcon className="w-4 h-4 text-gray-500"/>} label="Parts (1)" level={0} isBold={true} defaultOpen={true}>
             <TreeItem icon={<FileIcon className="w-4 h-4 text-green-400"/>} label="jet.obj" level={1} />
