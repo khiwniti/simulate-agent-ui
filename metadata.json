@@ -1,0 +1,5 @@
+{
+  "name": "Jet Simulation UI Clone",
+  "description": "A high-fidelity UI clone of a complex 3D simulation and analysis application, built with React, TypeScript, and Tailwind CSS. This project replicates the dark-themed, multi-panel layout featuring a scene graph, properties inspector, main 3D viewport, timeline controls, and an AI assistant chat panel.",
+  "requestFramePermissions": []
+}
