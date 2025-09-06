@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { SearchIcon, JetIcon, ChevronDownIcon } from './icons';
+import { SearchIcon, ChevronDownIcon } from './icons';
 import Dropdown, { DropdownItem } from './Dropdown';
+import type { WorkflowStage } from '../App';
 
 const DropdownButton: React.FC<{ children: React.ReactNode, isOpen: boolean }> = ({ children, isOpen }) => (
     <button className={`flex items-center space-x-1 px-3 py-1 rounded text-sm ${isOpen ? 'bg-gray-700' : ''} hover:bg-gray-700`}>
@@ -10,15 +11,17 @@ const DropdownButton: React.FC<{ children: React.ReactNode, isOpen: boolean }> =
     </button>
 );
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    currentStage: WorkflowStage;
+}
+
+const Header: React.FC<HeaderProps> = ({ currentStage }) => {
+  const isResultsStage = currentStage === 'results';
+
   return (
-    <div className="flex items-center justify-between px-4 py-1.5 bg-[#202326] border-b border-gray-700">
+    <div className="flex items-center justify-between px-4 py-1.5 bg-[#202326] border-b border-gray-700 h-[53px]">
       <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2">
-            <JetIcon className="w-5 h-5 text-gray-400" />
-            <span className="font-bold text-sm text-white">Jet</span>
-        </div>
-        <div className="flex items-center space-x-1 text-sm">
+        <div className={`flex items-center space-x-1 text-sm ${!isResultsStage ? 'opacity-50 pointer-events-none' : ''}`} aria-disabled={!isResultsStage}>
           <Dropdown trigger={(isOpen) => <DropdownButton isOpen={isOpen}>ANALYTICS</DropdownButton>}>
             <DropdownItem>Performance Metrics</DropdownItem>
             <DropdownItem>Flow Visualization</DropdownItem>
@@ -37,12 +40,8 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex-1 flex justify-center text-sm">
-        <div className="flex space-x-1 bg-gray-800 p-0.5 rounded-md">
-          <button className="px-4 py-0.5 rounded-md text-gray-400 hover:bg-gray-700">CAD</button>
-          <button className="px-4 py-0.5 rounded-md bg-gray-600 text-white">Setup</button>
-          <button className="px-4 py-0.5 rounded-md text-gray-400 hover:bg-gray-700">Post-Processing</button>
-        </div>
+      <div className="flex-1 flex justify-center text-sm font-bold text-gray-400 uppercase tracking-wider">
+        {currentStage}
       </div>
 
       <div className="flex items-center space-x-4">
